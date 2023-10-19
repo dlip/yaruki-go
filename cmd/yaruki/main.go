@@ -4,8 +4,9 @@ import (
 	"io"
 	"net/http"
 
+	"errors"
 	"github.com/a-h/templ"
-	views "github.com/dlip/yaruki-go/pkg/views"
+	"github.com/dlip/yaruki-go/pkg/views"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -14,7 +15,10 @@ type Template struct {
 }
 
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	component := data.(templ.Component)
+	component, ok := data.(templ.Component)
+	if !ok {
+		return errors.New("Unable to render template")
+	}
 	component.Render(c.Request().Context(), w)
 	return nil
 }
