@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/a-h/templ v0.2.408
 	github.com/labstack/echo/v4 v4.11.2
+	github.com/maragudk/gomponents v0.20.1
 )
 
 require (
